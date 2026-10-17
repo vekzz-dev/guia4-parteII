@@ -62,6 +62,7 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.Fila> {
         fila.cbCompletada.setChecked(t.isCompletada());
 
         fila.tvTexto.setText(t.getTitulo() + "\n" + t.getFechaEntrega());
+        fila.tvPrioridad.setText("Prioridad: " + t.getPrioridad().etiqueta());
         fila.cbCompletada.setOnCheckedChangeListener(
                 (vista, marcada) -> acciones.cambiarCompletada(t, marcada));
         fila.itemView.setOnClickListener(v -> acciones.editar(t));
@@ -76,12 +77,14 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.Fila> {
     static class Fila extends RecyclerView.ViewHolder {
         final CheckBox cbCompletada;
         final TextView tvTexto;
+        final TextView tvPrioridad;
         final Button btnEliminar;
 
         Fila(@NonNull View vista) {
             super(vista);
             cbCompletada = vista.findViewById(R.id.cbCompletada);
             tvTexto = vista.findViewById(R.id.tvTexto);
+            tvPrioridad = vista.findViewById(R.id.tvPrioridad);
             btnEliminar = vista.findViewById(R.id.btnEliminar);
         }
     }
