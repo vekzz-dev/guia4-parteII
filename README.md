@@ -188,3 +188,70 @@ Es la prueba práctica de la sección 5 de la guía: cambiar una sola constante
 pasa toda la aplicación del archivo JSON a la lista en memoria. Sirve además
 para que el equipo pueda avanzar en la interfaz aunque la persistencia todavía
 no esté lista.
+
+---
+
+## Pregunta de reflexión de la guía
+
+> Si mañana la institución exige guardar los datos en una base de datos,
+> ¿cuántas clases tendrías que modificar en tu proyecto de consola y cuántos
+> archivos de la carpeta `ui` en tu app móvil?
+
+**Cero archivos de `ui`.** Y no es una promesa: hay prueba dentro del repositorio.
+
+### Por qué cero
+
+`ui/` importa exactamente esto:
+
+```
+sv.edu.ufg.agenda.AgendaApp
+sv.edu.ufg.agenda.dao.DAOFactory
+sv.edu.ufg.agenda.dao.MateriaDAO
+sv.edu.ufg.agenda.dao.TareaDAO
+sv.edu.ufg.agenda.modelo.Materia
+sv.edu.ufg.agenda.modelo.Prioridad
+sv.edu.ufg.agenda.modelo.Tarea
+sv.edu.ufg.agenda.R
+```
+
+Ni una implementación concreta. Se comprueba con:
+
+```bash
+grep -rn "DAOJson\|DAOMemoria" app/src/main/java/sv/edu/ufg/agenda/ui/
+# sin resultados
+```
+
+Los DAO se construyen en **un solo lugar** del proyecto, el constructor de
+`DAOFactory`:
+
+```java
+this.materiaDAO = new MateriaDAOJson(new File(carpetaDatos, "materias.json"));
+this.tareaDAO = new TareaDAOJson(new File(carpetaDatos, "tareas.json"));
+```
+
+### La prueba ya está hecha, no hay que imaginarla
+
+El reto de los DAO en memoria **es** ese cambio. Se agregaron
+`MateriaDAOMemoria` y `TareaDAOMemoria`, se tocó una sola constante y ninguna
+pantalla, adapter ni layout se enteró. Cambiar a SQLite es el mismo movimiento
+con otras dos clases.
+
+### Qué habría que hacer para pasar a SQLite
+
+| Acción | Alcance |
+|---|---|
+| **Crear** | `MateriaDAOSqlite implements MateriaDAO` y `TareaDAOSqlite implements TareaDAO` |
+| **Modificar** | las dos líneas del constructor de `DAOFactory` |
+| **No tocar** | todo `ui/`, los cuatro layouts, los adapters, `AgendaApp` y `AndroidManifest.xml` |
+
+### El proyecto de consola
+
+El razonamiento es idéntico: ya existe una interfaz que declara el contrato, así
+que basta con una clase nueva que la implemente y cambiar la línea donde se
+construye el DAO. El menú, las validaciones y la impresión no se tocan.
+
+### Conclusión
+
+La respuesta es **«una»** y **«ninguno»**: el patrón se aplicó bien en las dos
+partes. Si hubiera que tocar una Activity para cambiar de almacén, el DAO no
+estaría abstraiendo nada: sería un envoltorio con pasos extra.
