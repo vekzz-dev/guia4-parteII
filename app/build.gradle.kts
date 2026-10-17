@@ -35,4 +35,7 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("com.google.code.gson:gson:2.11.0")
+
+    // Pruebas locales sobre la capa de datos: no necesitan emulador.
+    testImplementation("junit:junit:4.13.2")
 }
