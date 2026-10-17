@@ -25,6 +25,14 @@
         android:layout_height="wrap_content"
         android:text="Agregar materia" />
 
+    <EditText
+        android:id="@+id/etBuscarMateria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Buscar materia por nombre"
+        android:inputType="text" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMaterias"
         android:layout_width="match_parent"
