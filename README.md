@@ -188,18 +188,3 @@ Es la prueba práctica de la sección 5 de la guía: cambiar una sola constante
 pasa toda la aplicación del archivo JSON a la lista en memoria. Sirve además
 para que el equipo pueda avanzar en la interfaz aunque la persistencia todavía
 no esté lista.
-
----
-
-## Estado
-
-Código completo según los Pasos 7 a 13, más las actividades de ampliación
-(prioridad, búsqueda en las dos pantallas, conteo de pendientes, DAO en memoria
-y prueba JUnit).
-
-**Nada se compiló ni se ejecutó:** no hay toolchain de Android instalado. La
-prueba `TareaDAOJsonTest` está escrita pero tampoco se ejecutó.
-
-Para retomarlo: abrir esta carpeta en Android Studio, dejar que genere el
-*Gradle wrapper* y sincronizar, y después recorrer el flujo del Paso 15 en un
-emulador.
