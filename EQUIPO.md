@@ -112,21 +112,9 @@ compilable.
 
 ## Estado
 
-| Parte | Estado |
-|---|---|
-| **Parte I** (`../parte1-consola`, sin Git) | Compilada y ejecutada con Maven. `datos/estudiantes.json` coincide con el resultado del Paso 6 y la persistencia entre ejecuciones está verificada. |
-| **Parte II** (este repositorio) | Código completo según los Pasos 7 a 13. **No se compiló ni se ejecutó**: no hay toolchain de Android instalado. |
+Código completo según los Pasos 7 a 13. **No se compiló ni se ejecutó**: no hay
+toolchain de Android instalado.
 
 Para retomarlo: abrir esta carpeta en Android Studio, dejar que genere el
 *Gradle wrapper* y sincronizar, y después recorrer el flujo del Paso 15 en un
 emulador.
-
-### Actividades de la guía pendientes
-
-- [ ] Capturas de `materias.json` y `tareas.json` desde *Device Explorer* (rol B)
-- [ ] Atributo `prioridad` en `Tarea` (rol A)
-- [ ] Campo de búsqueda con `buscarPorNombre` y `buscarPorTitulo` (rol C con B)
-- [ ] Contador de tareas pendientes bajo cada materia (equipo)
-- [ ] `MateriaDAOMemoria` / `TareaDAOMemoria` y el cambio de una línea en la
-      fábrica (rol C)
-- [ ] Prueba JUnit de `TareaDAOJson` con `TemporaryFolder` (rol B)
