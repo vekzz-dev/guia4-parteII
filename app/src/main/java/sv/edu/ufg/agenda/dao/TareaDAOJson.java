@@ -8,7 +8,7 @@ import sv.edu.ufg.agenda.modelo.Tarea;
 
 /**
  * DAO de Tarea. Todo el CRUD viene heredado de {@link JsonDAOBase};
- * esta clase solo agrega el filtro por materia.
+ * esta clase solo agrega el filtro por materia y la búsqueda por título.
  */
 public class TareaDAOJson extends JsonDAOBase<Tarea> implements TareaDAO {
 
@@ -21,6 +21,18 @@ public class TareaDAOJson extends JsonDAOBase<Tarea> implements TareaDAO {
         List<Tarea> resultado = new ArrayList<>();
         for (Tarea t : cargar()) {
             if (t.getMateriaId() == materiaId) {
+                resultado.add(t);
+            }
+        }
+        return resultado;
+    }
+
+    @Override
+    public List<Tarea> buscarPorTitulo(String texto) {
+        List<Tarea> resultado = new ArrayList<>();
+        String buscado = texto.toLowerCase();
+        for (Tarea t : cargar()) {
+            if (t.getTitulo().toLowerCase().contains(buscado)) {
                 resultado.add(t);
             }
         }
